@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/url_shortener
+    username: postgres
+    password: 123
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    url: ${spring.datasource.url}
+    locations: classpath:db/migration
+    enabled: true
