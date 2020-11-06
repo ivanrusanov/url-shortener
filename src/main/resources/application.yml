@@ -11,3 +11,5 @@ spring:
     url: ${spring.datasource.url}
     locations: classpath:db/migration
     enabled: true
+shortener:
+  host: localhost
