@@ -18,7 +18,7 @@ public class Link {
     private Long id;
     @Column(name = "long_url")
     private String longUrl;
-    @Column(name = "short_url")
+    @Column(name = "short_url" /*, unique=true*/)
     private String shortUrl;
     @Column(name = "creation_date", columnDefinition = "TIMESTAMP")
     private LocalDateTime creationDate;
