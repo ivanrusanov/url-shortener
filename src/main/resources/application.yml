@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  jpa:
+    open-in-view: false
   datasource:
     url: jdbc:postgresql://localhost:5432/url_shortener
     username: postgres
