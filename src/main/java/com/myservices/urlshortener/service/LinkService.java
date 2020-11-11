@@ -5,6 +5,7 @@ import com.myservices.urlshortener.entities.RawLink;
 import com.myservices.urlshortener.repositories.LinkRepository;
 import com.myservices.urlshortener.utils.StringTools;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,11 @@ import java.util.NoSuchElementException;
 
 @Service
 public class LinkService {
+
     private final LinkRepository linkRepository;
+
+    @Value("${shortener.pathLength}")
+    private String pathLength;
 
     @Autowired
     public LinkService(LinkRepository linkRepository) {
@@ -21,9 +26,11 @@ public class LinkService {
     }
 
     public Link addLink(RawLink longUrl) {
-        // todo: remove magic constant
         // todo: add timezone
-        Link link = new Link(longUrl.getUrl(), StringTools.getRandomString(5), LocalDateTime.now());
+        Link link = new Link(
+                longUrl.getUrl(),
+                StringTools.getRandomString(Integer.parseInt(pathLength)),
+                LocalDateTime.now());
         linkRepository.saveAndFlush(link);
         return link;
     }
