@@ -22,6 +22,8 @@ public class Link {
     private String shortUrl;
     @Column(name = "creation_date", columnDefinition = "TIMESTAMP")
     private LocalDateTime creationDate;
+    @Column(name = "click_count")
+    private int clickCount;
 
     protected Link() {}
 
@@ -45,6 +47,14 @@ public class Link {
 
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public int getClickCount() {
+        return clickCount;
+    }
+
+    public void incrementClickCount() {
+        clickCount++;
     }
 
     @Override

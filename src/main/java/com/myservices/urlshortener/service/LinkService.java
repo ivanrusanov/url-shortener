@@ -36,8 +36,10 @@ public class LinkService {
     }
 
     public String getRedirectUrl(String shortUrl) {
-        Example<Link> linkExample = Example.of(new Link(null, shortUrl, null));
-        Link link = linkRepository.findOne(linkExample).orElseThrow(NoSuchElementException::new);
+        Link link = linkRepository.findByShortUrl(shortUrl);
+        // todo: I think it's not the best place for counter incrementation
+        link.incrementClickCount();
+        linkRepository.save(link);
         return link.getLongUrl();
     }
 }
