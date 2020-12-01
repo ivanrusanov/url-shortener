@@ -36,4 +36,9 @@ public class LinkController {
         modelMap.addAttribute("attribute", "redirectWithRedirectPrefix");
         return new ModelAndView("redirect:" + linkService.processRedirect(uid, userAgent));
     }
+
+    @PostMapping(value = "/{uid}/deactivate")
+    public void deactivate(@PathVariable String uid) {
+        linkService.deactivateLink(uid);
+    }
 }

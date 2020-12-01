@@ -26,6 +26,8 @@ public class Link {
     private LocalDateTime creationDate;
     @OneToMany(mappedBy = "link")
     private Set<Click> clickSet;
+    @Column(name = "is_active")
+    private boolean isActive = true;
 
     protected Link() {
     }
@@ -54,6 +56,14 @@ public class Link {
 
     public Set<Click> getClickSet() {
         return clickSet;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.myservices.urlshortener.service;
 
+import com.myservices.urlshortener.exception.LinkIsNotActiveException;
+import com.myservices.urlshortener.exception.LinkNotFound;
 import com.myservices.urlshortener.model.Link;
 import com.myservices.urlshortener.dto.LinkDto;
 import com.myservices.urlshortener.repository.LinkRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class LinkService {
@@ -44,8 +47,20 @@ public class LinkService {
     }
 
     public String processRedirect(String shortUrl, String userAgent) {
-        Link link = linkRepository.findByShortUrl(shortUrl);
+        Link link = Optional.ofNullable(linkRepository.findByShortUrl(shortUrl))
+                .orElseThrow(LinkNotFound::new);
+        if (!link.isActive()) {
+            throw new LinkIsNotActiveException();
+        }
         clickService.saveClick(link, userAgent);
         return link.getLongUrl();
+    }
+
+    public void deactivateLink(String shortUrl) {
+        Link link = linkRepository.findByShortUrl(shortUrl);
+        if (link != null) {
+            link.setActive(false);
+            linkRepository.save(link);
+        }
     }
 }
