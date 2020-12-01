@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "link")
@@ -22,10 +24,11 @@ public class Link {
     private String shortUrl;
     @Column(name = "creation_date", columnDefinition = "TIMESTAMP")
     private LocalDateTime creationDate;
-    @Column(name = "click_count")
-    private int clickCount;
+    @OneToMany(mappedBy = "link")
+    private Set<Click> clickSet;
 
-    protected Link() {}
+    protected Link() {
+    }
 
     public Link(String longUrl, String shortUrl, LocalDateTime creationDate) {
         this.longUrl = longUrl;
@@ -49,12 +52,8 @@ public class Link {
         return creationDate;
     }
 
-    public int getClickCount() {
-        return clickCount;
-    }
-
-    public void incrementClickCount() {
-        clickCount++;
+    public Set<Click> getClickSet() {
+        return clickSet;
     }
 
     @Override

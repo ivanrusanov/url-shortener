@@ -15,12 +15,15 @@ public class LinkService {
 
     private final LinkRepository linkRepository;
 
+    private final ClickService clickService;
+
     @Value("${shortener.pathLength}")
     private String pathLength;
 
     @Autowired
-    public LinkService(LinkRepository linkRepository) {
+    public LinkService(LinkRepository linkRepository, ClickService clickService) {
         this.linkRepository = linkRepository;
+        this.clickService = clickService;
     }
 
     public Link addLink(LinkDto longUrl) {
@@ -33,11 +36,9 @@ public class LinkService {
         return link;
     }
 
-    public String getRedirectUrl(String shortUrl) {
+    public String processRedirect(String shortUrl, String userAgent) {
         Link link = linkRepository.findByShortUrl(shortUrl);
-        // todo: I think it's not the best place for counter incrementation
-        link.incrementClickCount();
-        linkRepository.save(link);
+        clickService.saveClick(link, userAgent);
         return link.getLongUrl();
     }
 }
