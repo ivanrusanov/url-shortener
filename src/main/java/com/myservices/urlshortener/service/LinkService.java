@@ -1,16 +1,14 @@
 package com.myservices.urlshortener.service;
 
-import com.myservices.urlshortener.dto.Link;
-import com.myservices.urlshortener.entities.RawLink;
-import com.myservices.urlshortener.repositories.LinkRepository;
-import com.myservices.urlshortener.utils.StringTools;
+import com.myservices.urlshortener.model.Link;
+import com.myservices.urlshortener.dto.LinkDto;
+import com.myservices.urlshortener.repository.LinkRepository;
+import com.myservices.urlshortener.util.StringTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
 
 @Service
 public class LinkService {
@@ -25,7 +23,7 @@ public class LinkService {
         this.linkRepository = linkRepository;
     }
 
-    public Link addLink(RawLink longUrl) {
+    public Link addLink(LinkDto longUrl) {
         // todo: add timezone
         Link link = new Link(
                 longUrl.getUrl(),

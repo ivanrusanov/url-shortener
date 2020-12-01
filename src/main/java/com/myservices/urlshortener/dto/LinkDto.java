@@ -1,6 +1,6 @@
-package com.myservices.urlshortener.entities;
+package com.myservices.urlshortener.dto;
 
-public class RawLink {
+public class LinkDto {
     private String url;
 
     public String getUrl() {

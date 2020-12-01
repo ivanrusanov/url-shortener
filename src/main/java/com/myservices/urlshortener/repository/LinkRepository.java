@@ -1,6 +1,6 @@
-package com.myservices.urlshortener.repositories;
+package com.myservices.urlshortener.repository;
 
-import com.myservices.urlshortener.dto.Link;
+import com.myservices.urlshortener.model.Link;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LinkRepository extends JpaRepository<Link, Long> {

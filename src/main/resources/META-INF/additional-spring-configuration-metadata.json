@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "shortener.host",
+      "type": "java.lang.String",
+      "description": "Host which would be used in short url."
+    },
+    {
+      "name": "shortener.pathLength",
+      "type": "java.lang.String",
+      "description": "Length of the path part in short url."
+    }
+  ] }

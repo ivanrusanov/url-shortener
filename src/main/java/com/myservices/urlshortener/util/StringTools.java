@@ -1,4 +1,4 @@
-package com.myservices.urlshortener.utils;
+package com.myservices.urlshortener.util;
 
 import java.util.Random;
 

@@ -1,9 +1,9 @@
-package com.myservices.urlshortener.properties;
+package com.myservices.urlshortener.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "shortener")
-public class ShortenerProperties {
+public class ShortenerConfig {
     /**
      * Host name which would be used in short url
      */

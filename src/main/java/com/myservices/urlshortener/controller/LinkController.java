@@ -1,9 +1,9 @@
-package com.myservices.urlshortener.controllers;
+package com.myservices.urlshortener.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myservices.urlshortener.dto.Link;
-import com.myservices.urlshortener.entities.RawLink;
+import com.myservices.urlshortener.model.Link;
+import com.myservices.urlshortener.dto.LinkDto;
 import com.myservices.urlshortener.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -25,8 +25,8 @@ public class LinkController {
 
     @PostMapping(value = "/add", consumes = "application/json")
     public String addLink(@RequestBody String json) throws JsonProcessingException {
-        RawLink rawLink = new ObjectMapper().readValue(json, RawLink.class);
-        Link link = linkService.addLink(rawLink);
+        LinkDto linkDto = new ObjectMapper().readValue(json, LinkDto.class);
+        Link link = linkService.addLink(linkDto);
         return link.getShortUrl();
     }
 

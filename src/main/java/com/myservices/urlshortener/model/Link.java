@@ -1,4 +1,4 @@
-package com.myservices.urlshortener.dto;
+package com.myservices.urlshortener.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
