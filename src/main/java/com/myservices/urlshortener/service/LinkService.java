@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Service
 public class LinkService {
@@ -27,6 +28,12 @@ public class LinkService {
     }
 
     public Link addLink(LinkDto longUrl) {
+        if (!longUrl.isUnique()) {
+            ArrayList<Link> links = linkRepository.findAllByLongUrl(longUrl.getUrl());
+            if (!links.isEmpty()) {
+                return links.get(0);
+            }
+        }
         // todo: add timezone
         Link link = new Link(
                 longUrl.getUrl(),
